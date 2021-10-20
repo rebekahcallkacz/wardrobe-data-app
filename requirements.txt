@@ -1,0 +1,15 @@
+certifi==2021.10.8
+click==8.0.3
+Flask==2.0.2
+Flask-SQLAlchemy==2.5.1
+greenlet==1.1.2
+gunicorn==20.1.0
+importlib-metadata==4.8.1
+itsdangerous==2.0.1
+Jinja2==3.0.2
+MarkupSafe==2.0.1
+psycopg2 @ file:///opt/concourse/worker/volumes/live/ad0d2468-72e7-4502-526f-2fd0ec5d33ff/volume/psycopg2_1612298588979/work
+SQLAlchemy==1.4.26
+typing-extensions==3.10.0.2
+Werkzeug==2.0.2
+zipp==3.6.0
