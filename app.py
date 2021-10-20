@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # Add the connection to the sqlite database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wardrobe_data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/wardrobe_data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Get the db instance
