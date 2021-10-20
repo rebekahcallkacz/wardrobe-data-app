@@ -1,4 +1,4 @@
-""" Flask application that runs the API and renders the html pages """
+""" Flask application that runs the API and renders the html page(s) """
 from flask import Flask, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
@@ -36,12 +36,18 @@ class WearCount(db.Model):
 def index():
     return render_template("index.html")
 
-# This route returns the data from the database
+# This route returns info about individual items
 @app.route("/api/items")
 def get_items():
+    # DB query to table item_info
+    # (ItemInfo is the class we defined above which references that table)
     items = db.session.query(ItemInfo)
+    # This query returns a sqlalchemy object that has to be parsed
+    # Create an empty list to store our parsed object
     items_parsed = []
+    # Iterate through each object returned (which you can think of as a row from the table)
     for item in items:
+        # For each "row", create a dictionary from each column
         item_dict = {
             "unique_id": item.unique_id,
             "item": item.item,
@@ -53,12 +59,17 @@ def get_items():
             "source": item.source,
             "category": item.category
         }
+        # Add each dictionary to the list
         items_parsed.append(item_dict)
+    # Return the list of dictionaries 
     return jsonify(items_parsed)
 
+# This route returns wear counts by month for each item in the db
 @app.route("/api/wears")
 def get_wears():
-    wears = db.session.query(WearCount, ItemInfo.item, ItemInfo.source, ItemInfo.category).join(ItemInfo, WearCount.unique_id == ItemInfo.unique_id)
+    # Same as above except that this time we are joining to tables and pulling fields (columns) from both
+    wears = db.session.query(WearCount, ItemInfo.item, ItemInfo.source, ItemInfo.category)\
+        .join(ItemInfo, WearCount.unique_id == ItemInfo.unique_id)
     items_parsed = []
     for item in wears:
         item_dict = {
