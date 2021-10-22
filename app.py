@@ -6,8 +6,9 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # Add the connection to the sqlite database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/wardrobe_data.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/wardrobe_data.db"
+# This just ensures that the app runs more quickly
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Get the db instance
 db = SQLAlchemy(app)
@@ -83,5 +84,6 @@ def get_wears():
         items_parsed.append(item_dict)
     return jsonify(items_parsed)
 
+# You need this - this allows you to actually run the app
 if __name__ == "__main__":
     app.run(debug=True)

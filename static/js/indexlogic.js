@@ -9,16 +9,18 @@ function getColorGradientGenerator(min, max) {
     return generator;
 };
 
-// Creates a scatter chart
+// Generates a scatter chart that shows cost by wears per month
 function generateCostByWearsChart(itemsData) {
     // Parse the items data - pull out cost, wears per month and cost per wear
+    // Store each in an array (this is how Plotly wants the data)
     const itemsCost = itemsData.map(item => item.cost);
     const itemsWearsPerMonth = itemsData.map(item => item.wears_per_month);
     const itemsCostPerWear = itemsData.map(item => item.cost_per_wear);
 
     // Create a color gradient generator based on the max and min cost per wear
     const colorGenerator = getColorGradientGenerator(Math.min(...itemsCostPerWear), Math.max(...itemsCostPerWear));
-    // Store each color in an array
+    // Use the color generator to get a color for each item based on cost per wear
+    // Store these colors in an array
     const costPerWearColors = itemsCostPerWear.map(item => colorGenerator(item));
 
     // Create the data trace for the plot
@@ -92,9 +94,9 @@ function generateItemsBySource(itemsData) {
 };
 
 /////////// API Calls (and actually running the code) /////////////
-// Call your API route that returns data and initialize your plots
+// Use d3 to call your API route that returns data and then initialize your plots
 d3.json("api/items").then((itemsData) => {
-    // Call the function above to generate the scatter plot
+    // Calls the functions above to generate the plots
     generateCostByWearsChart(itemsData);
     generateItemsBySource(itemsData);
 });
