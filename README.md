@@ -1,6 +1,8 @@
 # [View the Website](https://wardrobe-data.herokuapp.com/)
 This is a full stack application to visualize personal wardrobe data.
 
+# [View Tutorial Slides](https://docs.google.com/presentation/d/1iVYVOc2IOzBlkcj7Y6eUn38fDYGf1HxdVVYdgknJkSI/edit?usp=sharing)
+
 # Deploying a Full(ish) Stack App with Heroku
 ## Prereqs
 - Github account
